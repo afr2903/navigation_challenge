@@ -44,6 +44,7 @@ void newPoseCallback(const geometry_msgs::PoseWithCovarianceStamped::ConstPtr& m
             ROS_INFO("point pushed");
         break;
         case 'D':
+            //Save data in a txt file
             points.push_back( current_point );
             cout << "Type the name for this path:\n-";
             cin >> path_name;

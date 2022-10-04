@@ -26,6 +26,7 @@ int main(int argc, char **argv){
     ifstream myfile ( path_name );
     if (myfile.is_open()){
         while ( getline (myfile,line) ){
+            //Append the pose info in a local vector
             switch (line_idx%3){
                 case 0:
                     current_point.x = stof(line);
@@ -50,10 +51,10 @@ int main(int argc, char **argv){
         ROS_INFO("point [%f],[%f],[%f]", point.x, point.y, point.theta);
     }
 
-    //tell the action client that we want to spin a thread by default
+    //Tell the action client that we want to spin a thread by default
     MoveBaseClient ac("move_base", true);
 
-    //wait for the action server to come up
+    //Wait for the action server to come up
     while(!ac.waitForServer(ros::Duration(5.0))){
         ROS_INFO("Waiting for the move_base action server to come up");
     }
@@ -67,6 +68,7 @@ int main(int argc, char **argv){
         goal.target_pose.pose.position.x = point.x;
         goal.target_pose.pose.position.y = point.y;
 
+        //Reverse the conversion to get a Quaternion
         tf::Quaternion current_quaternion;
         current_quaternion.setRPY(0, 0, point.theta);
         current_quaternion = current_quaternion.normalize();
