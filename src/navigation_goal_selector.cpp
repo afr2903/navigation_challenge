@@ -34,6 +34,7 @@ void newPoseCallback(const geometry_msgs::PoseWithCovarianceStamped::ConstPtr& m
     
     //Key based interface
     char key;
+    string path_name;
     cout << "Press an action key:\n-[N] Next point\n-[R] Repeat point\n-[D] Done\n-";
     cin >> key;
 
@@ -44,7 +45,10 @@ void newPoseCallback(const geometry_msgs::PoseWithCovarianceStamped::ConstPtr& m
         break;
         case 'D':
             points.push_back( current_point );
-            points_file.open( "/home/afr2903/catkin_ws/test.txt" ); //Change username
+            cout << "Type the name for this path:\n-";
+            cin >> path_name;
+            path_name = "/home/{user}/catkin_ws/src/navigation_challenge/paths/" + path_name + ".txt"; //Change username
+            points_file.open( path_name ); 
             for(auto point:points){
                 points_file << point.x << "\n";
                 points_file << point.y << "\n";
@@ -66,7 +70,7 @@ int main(int argc, char **argv){
     ros::NodeHandle node;
 
     //Suscriber node to the initialpose topic that detects and shows only the changes in the pose
-    ros::Subscriber sub = node.subscribe("initialpose", 0, newPoseCallback);
+    ros::Subscriber sub = node.subscribe("initialpose", 100, newPoseCallback);
 
     while( ros::ok() ){
         //Flag activated when goal selector task finishes

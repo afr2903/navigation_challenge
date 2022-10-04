@@ -19,7 +19,11 @@ int main(int argc, char **argv){
     int line_idx = 0;
     geometry_msgs::Pose2D current_point;
     
-    ifstream myfile ("/home/afr2903/test.txt");
+    string path_name;
+    cout << "Type the name of the path you want to open:\n-";
+    cin >> path_name;
+    path_name = "/home/{user}/catkin_ws/src/navigation_challenge/paths/" + path_name + ".txt"; //Change username
+    ifstream myfile ( path_name );
     if (myfile.is_open()){
         while ( getline (myfile,line) ){
             switch (line_idx%3){
