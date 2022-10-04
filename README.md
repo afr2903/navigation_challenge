@@ -7,6 +7,8 @@
 Navigation pathfollower application with a goal selector visual feature,
 powered with ROS Noetic and the ROS Navigation Stack.
 
+Video demonstration: https://youtu.be/m2oyLRKSaFA
+
 ## Features
 
 - PGM file generated through SLAM and optimized for different robot types
@@ -133,6 +135,9 @@ Type the name of the path you want to open:
 -
 ```
 Now you can enjoy watching the robot following your path ;)
+
+Here is the video demonstration of the whole project process: https://youtu.be/m2oyLRKSaFA
+
 Try adding obstacles during the runtime to witness the ROSNavigation Stack robustness and adaptability.
 
 Any feedback is appreciated <3
